@@ -6,9 +6,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GenomeAnalyzer.Domain", "Ge
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenomeAnalyzer.Domain", "GenomeAnalyzer.Domain\GenomeAnalyzer.Domain.csproj", "{B4E81BF7-AE25-4572-9E36-FF3983799CCD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GenomeAnalyzer.DAL", "GenomeAnalyzer.DAL", "{F3862F49-D476-429D-80AE-87E24D18677B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GenomeAnalyzer.DAL", "GenomeAnalyzer.DAL", "{340343FC-9FCC-4651-9749-92EBBBECF65B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenomeAnalyzer.DAL", "GenomeAnalyzer.DAL\GenomeAnalyzer.DAL\GenomeAnalyzer.DAL.csproj", "{BA020926-800D-442C-A982-3AD742EA6C10}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenomeAnalyzer.DAL", "GenomeAnalyzer.DAL\GenomeAnalyzer.DAL.csproj", "{270A496C-362B-4DE9-B812-02ABDBD73866}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,13 +24,13 @@ Global
 		{B4E81BF7-AE25-4572-9E36-FF3983799CCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4E81BF7-AE25-4572-9E36-FF3983799CCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4E81BF7-AE25-4572-9E36-FF3983799CCD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BA020926-800D-442C-A982-3AD742EA6C10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BA020926-800D-442C-A982-3AD742EA6C10}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BA020926-800D-442C-A982-3AD742EA6C10}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BA020926-800D-442C-A982-3AD742EA6C10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{270A496C-362B-4DE9-B812-02ABDBD73866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{270A496C-362B-4DE9-B812-02ABDBD73866}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{270A496C-362B-4DE9-B812-02ABDBD73866}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{270A496C-362B-4DE9-B812-02ABDBD73866}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B4E81BF7-AE25-4572-9E36-FF3983799CCD} = {67559D5D-C5F2-4B61-9106-36BBE4A9C7DC}
-		{BA020926-800D-442C-A982-3AD742EA6C10} = {F3862F49-D476-429D-80AE-87E24D18677B}
+		{270A496C-362B-4DE9-B812-02ABDBD73866} = {340343FC-9FCC-4651-9749-92EBBBECF65B}
 	EndGlobalSection
 EndGlobal

@@ -12,6 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\GenomeAnalyzer.DAL\GenomeAnalyzer.DAL.csproj" />
       <ProjectReference Include="..\GenomeAnalyzer.DAL\GenomeAnalyzer.DAL\GenomeAnalyzer.DAL.csproj" />
     </ItemGroup>
 

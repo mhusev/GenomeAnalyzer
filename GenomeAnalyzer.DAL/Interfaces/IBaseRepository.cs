@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-
-namespace GenomeAnalyzer.DAL.Interfaces;
+﻿namespace GenomeAnalyzer.DAL.Interfaces;
 
 public interface IBaseRepository<T>
 {

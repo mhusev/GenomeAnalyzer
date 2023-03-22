@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using GenomeAnalyzer.DAL.Interfaces;
+﻿using GenomeAnalyzer.DAL.Interfaces;
 using GenomeAnalyzer.Domain.Entities;
 
 namespace GenomeAnalyzer.DAL.Repositories;
