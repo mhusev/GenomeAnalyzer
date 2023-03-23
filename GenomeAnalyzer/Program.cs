@@ -1,10 +1,18 @@
 using GenomeAnalyzer.DAL;
+using GenomeAnalyzer.DAL.Interfaces;
+using GenomeAnalyzer.DAL.Repositories;
+using GenomeAnalyzer.Domain.Entities;
+using GenomeAnalyzer.Services.Implementations;
+using GenomeAnalyzer.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddTransient<IBaseRepository<GenomeEntity>, GenomeRepository>();
+builder.Services.AddTransient<IHomeService, HomeService>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {

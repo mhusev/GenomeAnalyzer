@@ -12,9 +12,10 @@ public class GenomeEntity
     
     public string RawGenome { get; set; }
 
-    public GenomeEntity(string name, string rawGenome)
+    public GenomeEntity(string name, SpeciesType type, string rawGenome)
     {
         Name = name;
+        Type = type;
         RawGenome = rawGenome;
     }
 }

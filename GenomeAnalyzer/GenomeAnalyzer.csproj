@@ -13,6 +13,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\GenomeAnalyzer.DAL\GenomeAnalyzer.DAL.csproj" />
+      <ProjectReference Include="..\GenomeAnalyzer.Services\GenomeAnalyzer.Services.csproj" />
     </ItemGroup>
 
 </Project>

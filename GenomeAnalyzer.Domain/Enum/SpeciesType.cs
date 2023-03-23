@@ -4,5 +4,6 @@ public enum SpeciesType
 {
     Felidae,
     Ursidae,
+    Hominidae,
     Virus
 }

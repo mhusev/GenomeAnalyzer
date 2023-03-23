@@ -1,21 +1,37 @@
 ﻿using System.Diagnostics;
+using GenomeAnalyzer.Domain.Entities;
+using GenomeAnalyzer.Domain.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using GenomeAnalyzer.Models;
+using GenomeAnalyzer.Services.Interfaces;
 
 namespace GenomeAnalyzer.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly IHomeService _homeService;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(IHomeService homeService)
     {
-        _logger = logger;
+        _homeService = homeService;
     }
 
     public IActionResult Index()
     {
-        return View();
+        return View(_homeService.GetAll());
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(CreateGenomeViewModel model)
+    {
+        var response = await _homeService.Create(model);
+
+        if (response.StatusCode == Domain.Enum.StatusCode.Ok)
+        {
+            return Ok(new { description = response.Description });
+        }
+
+        return BadRequest(new { description = response.Description });
     }
 
     public IActionResult Privacy()
