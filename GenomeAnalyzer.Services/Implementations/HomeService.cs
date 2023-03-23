@@ -16,6 +16,11 @@ public class HomeService : IHomeService
         _genomeRepository = genomeRepository;
     }
 
+    public IQueryable<GenomeEntity> GetAll()
+    {
+        return _genomeRepository.GetAll();
+    }
+
     public async Task<IBaseResponse<GenomeEntity>> Create(GenomeEntity entity)
     {
         if (entity.Name is not null && entity.RawGenome is not null)

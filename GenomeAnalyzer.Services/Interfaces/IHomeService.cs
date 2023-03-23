@@ -5,5 +5,6 @@ namespace GenomeAnalyzer.Services.Interfaces;
 
 public interface IHomeService
 {
+    IQueryable<GenomeEntity> GetAll();
     Task<IBaseResponse<GenomeEntity>> Create(GenomeEntity entity);
 }
