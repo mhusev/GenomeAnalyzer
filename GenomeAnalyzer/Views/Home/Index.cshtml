@@ -29,10 +29,6 @@
     </form>
 </div>
 
-<div id="creatingStatusCode">
-    <span id="responseDescription"></span>
-</div>
-
 <table class="table table-striped">
     <thead>
     <tr>
@@ -82,8 +78,6 @@
                 data: $('#createGenomeForm').serialize(),
                 success: function (response) {
                     location.reload();
-                    //var span = document.getElementById("responseDescription");
-                    //span.textContent = "response.description";
                 },
                 error: function (response) {
                     
