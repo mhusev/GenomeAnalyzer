@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 builder.Services.AddTransient<IBaseRepository<GenomeEntity>, GenomeRepository>();
 builder.Services.AddTransient<IHomeService, HomeService>();

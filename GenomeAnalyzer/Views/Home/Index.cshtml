@@ -1,10 +1,13 @@
 ﻿@using GenomeAnalyzer.Domain.Enum
-@model IQueryable<GenomeAnalyzer.Domain.Entities.GenomeEntity>
+@using GenomeAnalyzer.Domain.Entities
+@model IQueryable<GenomeEntity>
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<div>
+<h3 class="mb-3 text-muted">There are a lot of genomes in the database. You can <a href="#" id="openingForm" class="text-muted">add one.</a></h3>
+
+<div id="createGenomeDiv" style="display:none;">
     <h4 class="mb-3 text-muted">Create genome entity</h4>
     <form id="createGenomeForm">
         <div class="mb-3">
@@ -19,7 +22,10 @@
             <label class="form-label">Raw genome</label>
             <textarea name="rawGenome" type="text" class="form-control"></textarea>
         </div>
-        <button id="createGenome" class="btn btn-primary mb-3">Submit</button>
+        <div class="btn-group" role="group">
+            <button id="createGenome" class="btn btn-outline-primary mb-3">Submit</button>
+            <button id="cancelButton" class="btn btn-outline-danger mb-3">Cancel</button>
+        </div>
     </form>
 </div>
 
@@ -58,6 +64,16 @@
 @section Scripts
 {
     <script>
+        $('#cancelButton').on('click', function (e) {
+                e.preventDefault();
+                document.getElementById('createGenomeDiv').style.display = "none";
+            });
+        
+        $('#openingForm').on('click', function (e) {
+                e.preventDefault();
+                document.getElementById('createGenomeDiv').style.display = "block";
+            });
+    
         $('#createGenome').on('click', function (e){
             e.preventDefault();
             $.ajax({
@@ -74,5 +90,5 @@
                 }
             });
         });
-    </script>    
+    </script>
 }
