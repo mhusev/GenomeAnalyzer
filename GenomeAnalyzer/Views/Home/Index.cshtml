@@ -48,7 +48,7 @@
             <td>
                 <div class="btn-group" role="group">
                     <button class="btn btn-sm btn-outline-secondary">Distribute</button>
-                    <button class="btn btn-sm btn-outline-secondary">Edit</button>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="callModal(@item.Id)">Edit</button>
                     <button class="btn btn-sm btn-outline-secondary">Delete</button>
                 </div>
             </td>
@@ -57,9 +57,36 @@
     </tbody>
 </table>
 
+<div class="modal fade" id="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Information</h5>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-outline-primary" id="putGenome">Save</button>
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts
 {
     <script>
+        function callModal (id) {
+            openModal({
+                url: '@Url.Action("GetGenome")',
+                data: id,
+                content: $('#modal')
+            })
+        }
+    
         $('#cancelButton').on('click', function (e) {
                 e.preventDefault();
                 document.getElementById('createGenomeDiv').style.display = "none";

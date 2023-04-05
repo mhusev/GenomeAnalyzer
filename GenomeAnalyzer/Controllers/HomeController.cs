@@ -33,6 +33,14 @@ public class HomeController : Controller
 
         return BadRequest(new { description = response.Description });
     }
+    
+    [HttpGet]
+    public async Task<IActionResult> GetGenome(long id)
+    {
+        var response = await _homeService.GetGenome(id);
+
+        return PartialView(response.Data);
+    }
 
     public IActionResult Privacy()
     {

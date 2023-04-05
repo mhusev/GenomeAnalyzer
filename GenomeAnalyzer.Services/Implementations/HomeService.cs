@@ -6,6 +6,7 @@ using GenomeAnalyzer.Domain.Enum;
 using GenomeAnalyzer.Domain.Response;
 using GenomeAnalyzer.Domain.ViewModels;
 using GenomeAnalyzer.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace GenomeAnalyzer.Services.Implementations;
 
@@ -16,6 +17,27 @@ public class HomeService : IHomeService
     public HomeService(IBaseRepository<GenomeEntity> genomeRepository)
     {
         _genomeRepository = genomeRepository;
+    }
+
+    public async Task<IBaseResponse<GenomeEntity>> GetGenome(long id)
+    {
+        var entity = await _genomeRepository.GetAll().FirstOrDefaultAsync(e => e.Id == id);
+
+        if (entity != null)
+        {
+            return new BaseResponse<GenomeEntity>()
+            {
+                Description = "Genome entity was found.",
+                StatusCode = StatusCode.Ok,
+                Data = entity
+            };
+        }
+
+        return new BaseResponse<GenomeEntity>()
+        {
+            Description = "Cannot find genome.",
+            StatusCode = StatusCode.InternalServerError
+        };
     }
 
     public IQueryable<GenomeEntity> GetAll()
