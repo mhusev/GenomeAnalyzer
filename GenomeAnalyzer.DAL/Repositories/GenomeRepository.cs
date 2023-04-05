@@ -31,9 +31,9 @@ public class GenomeRepository : IBaseRepository<GenomeEntity>
 
     public async Task<GenomeEntity> Update(GenomeEntity entity)
     {
-        _appDbContext.Update(entity);
+        var updatedEntity = _appDbContext.Update(entity);
         await _appDbContext.SaveChangesAsync();
 
-        return entity;
+        return updatedEntity.Entity;
     }
 }

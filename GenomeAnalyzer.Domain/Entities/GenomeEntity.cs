@@ -11,11 +11,4 @@ public class GenomeEntity
     public SpeciesType Type { get; set; }
     
     public string RawGenome { get; set; }
-
-    public GenomeEntity(string name, SpeciesType type, string rawGenome)
-    {
-        Name = name;
-        Type = type;
-        RawGenome = rawGenome;
-    }
 }

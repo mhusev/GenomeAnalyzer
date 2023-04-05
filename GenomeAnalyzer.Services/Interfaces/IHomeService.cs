@@ -7,6 +7,7 @@ namespace GenomeAnalyzer.Services.Interfaces;
 public interface IHomeService
 {
     Task<IBaseResponse<GenomeEntity>> GetGenome(long id);
+    Task<IBaseResponse<GenomeEntity>> Edit(GenomeEntity entity);
     IQueryable<GenomeEntity> GetAll();
     Task<IBaseResponse<GenomeEntity>> Create(CreateGenomeViewModel model);
 }

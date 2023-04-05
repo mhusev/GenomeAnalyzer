@@ -40,6 +40,30 @@ public class HomeService : IHomeService
         };
     }
 
+    public async Task<IBaseResponse<GenomeEntity>> Edit(GenomeEntity entity)
+    {
+        if (entity != null)
+        {
+            var dbEntity = await _genomeRepository.Update(entity);
+
+            if (dbEntity == entity)
+            {
+                return new BaseResponse<GenomeEntity>()
+                {
+                    Description = "Genome was updated successfully.",
+                    StatusCode = StatusCode.Ok,
+                    Data = dbEntity
+                };
+            }
+        }
+        
+        return new BaseResponse<GenomeEntity>()
+        {
+            Description = "Something went wrong.",
+            StatusCode = StatusCode.InternalServerError
+        };
+    }
+
     public IQueryable<GenomeEntity> GetAll()
     {
         return _genomeRepository.GetAll();
@@ -47,9 +71,14 @@ public class HomeService : IHomeService
 
     public async Task<IBaseResponse<GenomeEntity>> Create(CreateGenomeViewModel model)
     {
-        if (model.Name is not null && model.RawGenome is not null)
+        if (model is not null)
         {
-            var entity = new GenomeEntity(model.Name, model.Type, model.RawGenome);
+            var entity = new GenomeEntity()
+            {
+                Name = model.Name,
+                Type = model.Type,
+                RawGenome = model.RawGenome
+            };
             
             await _genomeRepository.Create(entity);
 

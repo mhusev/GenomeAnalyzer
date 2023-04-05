@@ -22,7 +22,7 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreateGenomeViewModel model)
+    public async Task<IActionResult> Create([FromBody] CreateGenomeViewModel model)
     {
         var response = await _homeService.Create(model);
 
@@ -38,8 +38,21 @@ public class HomeController : Controller
     public async Task<IActionResult> GetGenome(long id)
     {
         var response = await _homeService.GetGenome(id);
-
+        
         return PartialView(response.Data);
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> Edit([FromBody] GenomeEntity entity)
+    {
+        var response = await _homeService.Edit(entity);
+        
+        if (response.StatusCode == Domain.Enum.StatusCode.Ok)
+        {
+            return Ok(new { description = response.Description });
+        }
+
+        return BadRequest(new { description = response.Description });
     }
 
     public IActionResult Privacy()

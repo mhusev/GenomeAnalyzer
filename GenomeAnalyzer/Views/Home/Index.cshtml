@@ -68,7 +68,7 @@
             </div>
             <div class="modal-footer">
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-outline-primary" id="putGenome">Save</button>
+                    <button type="button" class="btn btn-outline-primary" id="editGenome">Save</button>
                     <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -86,6 +86,32 @@
                 content: $('#modal')
             })
         }
+        
+        $('#editGenome').on('click', function (e) {
+            e.preventDefault();
+            
+            let arr = $('#genomeForm').serialize().split('&');
+            let data = {
+                Id: parseInt(arr[0].split('=')[1]),
+                Name: arr[1].split('=')[1],
+                Type: parseInt(arr[2].split('=')[1]),
+                RawGenome: arr[3].split('=')[1]
+            }
+            
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Edit", "Home")',
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function (response) {
+                    console.log(response.description);
+                    location.reload();
+                },
+                error: function (response) {
+                    console.log(response.description);
+                }
+            });
+        });
     
         $('#cancelButton').on('click', function (e) {
                 e.preventDefault();
@@ -98,11 +124,19 @@
             });
     
         $('#createGenome').on('click', function (e){
-            e.preventDefault();
+            e.preventDefault();            
+            let arr = $('#createGenomeForm').serialize().split('&');
+            let data = {
+                Name: arr[0].split('=')[1],
+                Type: parseInt(arr[1].split('=')[1]),
+                RawGenome: arr[2].split('=')[1]
+            }
+            
             $.ajax({
                 type: 'POST',
                 url: '@Url.Action("Create", "Home")',
-                data: $('#createGenomeForm').serialize(),
+                contentType: "application/json",
+                data: JSON.stringify(data),
                 success: function (response) {
                     location.reload();
                 },
