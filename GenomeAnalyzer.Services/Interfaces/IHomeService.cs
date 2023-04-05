@@ -10,4 +10,5 @@ public interface IHomeService
     Task<IBaseResponse<GenomeEntity>> Edit(GenomeEntity entity);
     IQueryable<GenomeEntity> GetAll();
     Task<IBaseResponse<GenomeEntity>> Create(CreateGenomeViewModel model);
+    Task<IBaseResponse<bool>> Delete(long id);
 }

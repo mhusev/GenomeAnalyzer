@@ -42,10 +42,23 @@ $('#createGenome').on('click', function (e){
             location.reload();
         },
         error: function (response) {
-
+            console.log(response.description)
         }
     });
 });
+
+function deleteGenome (id) {
+    $.ajax({
+        type: 'DELETE',
+        url: 'Home/Delete?id=' + id,
+        success: function (response) {
+            location.reload()
+        },
+        error: function (response) {
+            console.log(response.description)
+        }
+    });
+};
 
 function callModal (id) {
     openModal({

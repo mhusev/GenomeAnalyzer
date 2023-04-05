@@ -95,4 +95,28 @@ public class HomeService : IHomeService
             StatusCode = StatusCode.InternalServerError
         };
     }
+
+    public async Task<IBaseResponse<bool>> Delete(long id)
+    {
+        var entity = await _genomeRepository.GetAll().FirstOrDefaultAsync(e => e.Id == id);
+
+        if (entity != null)
+        {
+            await _genomeRepository.Delete(entity);
+
+            return new BaseResponse<bool>()
+            {
+                Description = "Genome was deleted successfully.",
+                StatusCode = StatusCode.Ok,
+                Data = true
+            };
+        }
+
+        return new BaseResponse<bool>()
+        {
+            Description = "Something went wrong, cannot delete genome.",
+            StatusCode = StatusCode.InternalServerError,
+            Data = false
+        };
+    }
 }

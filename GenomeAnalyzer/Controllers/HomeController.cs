@@ -55,6 +55,22 @@ public class HomeController : Controller
         return BadRequest(new { description = response.Description });
     }
 
+    [HttpDelete]
+    public async Task<IActionResult> Delete([FromQuery] long id)
+    {
+        Console.WriteLine("////////////////////////////////////////////////////");
+        Console.WriteLine(id);
+        
+        var response = await _homeService.Delete(id);
+        
+        if (response.StatusCode == Domain.Enum.StatusCode.Ok)
+        {
+            return Ok(new { description = response.Description });
+        }
+
+        return BadRequest(new { description = response.Description });
+    }
+
     public IActionResult Privacy()
     {
         return View();
