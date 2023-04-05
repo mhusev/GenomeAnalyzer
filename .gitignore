@@ -78,7 +78,8 @@ _[Ss]cripts
 .idea/
 *.sln.iml
 
-wwwroot
+lib
+favicon.ico
 global.json
 appsettings.Development.json
 appsettings.json
