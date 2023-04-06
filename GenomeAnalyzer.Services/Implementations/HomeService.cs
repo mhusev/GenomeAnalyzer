@@ -1,6 +1,5 @@
-﻿using System.Runtime.CompilerServices;
-using GenomeAnalyzer.DAL.Interfaces;
-using GenomeAnalyzer.DAL.Repositories;
+﻿using GenomeAnalyzer.DAL.Interfaces;
+using GenomeAnalyzer.Domain.Distribution;
 using GenomeAnalyzer.Domain.Entities;
 using GenomeAnalyzer.Domain.Enum;
 using GenomeAnalyzer.Domain.Response;
@@ -138,6 +137,67 @@ public class HomeService : IHomeService
         {
             Description = "Something went wrong, cannot get a genome.",
             StatusCode = StatusCode.InternalServerError,
+        };
+    }
+
+    public async Task<IBaseResponse<DistributionData>> GetDistributionData(DistributionParams distributionParams)
+    {
+        var entity = await _genomeRepository.GetAll().FirstOrDefaultAsync(e => e.Id == distributionParams.Id);
+
+        if (entity == null)
+        {
+            return new BaseResponse<DistributionData>()
+            {
+                Description = "Genome's cannot be obtained.",
+                StatusCode = StatusCode.InternalServerError
+            };
+        }
+        
+        if (distributionParams.Nucleotide != null)
+        {
+            return new BaseResponse<DistributionData>()
+            {
+                Description = "Genome was distributed successfully.",
+                StatusCode = StatusCode.Ok,
+                Data = distributionParams.Nucleotide switch
+                {
+                    'a' => DistributionHelper.DistributeGenomeByAdenine(entity.RawGenome),
+                    'c' => DistributionHelper.DistributeGenomeByCytosine(entity.RawGenome),
+                    'g' => DistributionHelper.DistributeGenomeByGuanine(entity.RawGenome),
+                    't' => DistributionHelper.DistributeGenomeByThymine(entity.RawGenome),
+                    _   => throw new ArgumentOutOfRangeException(nameof(distributionParams.Nucleotide),
+                        $"Not expected nucleotide value: {distributionParams.Nucleotide}")  
+                 }
+            };
+        }
+
+        if (distributionParams.SequenceLength != null && distributionParams.StartPosition != null)
+        {
+            return new BaseResponse<DistributionData>()
+            {
+                Description = "Genome was distributed successfully.",
+                StatusCode = StatusCode.Ok,
+                Data = DistributionHelper.DistributeGenomeByConstantLength(entity.RawGenome, 
+                    (int)distributionParams.SequenceLength, 
+                    (int)distributionParams.StartPosition)
+            };
+        }
+
+        if (distributionParams.SequenceLength != null && distributionParams.StartPosition == null)
+        {
+            return new BaseResponse<DistributionData>()
+            {
+                Description = "Genome was distributed successfully.",
+                StatusCode = StatusCode.Ok,
+                Data = DistributionHelper.DistributeGenomeByNgram(entity.RawGenome, 
+                    (int)distributionParams.SequenceLength)
+            };
+        }
+
+        return new BaseResponse<DistributionData>()
+        {
+            Description = "There are not enough parameters to distribute.",
+            StatusCode = StatusCode.InternalServerError
         };
     }
 }

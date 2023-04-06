@@ -2,27 +2,27 @@
 
 public static class DistributionHelper
 {
-    public static DistibutionData DistributeGenomeByAdenine(string genome)
+    public static DistributionData DistributeGenomeByAdenine(string genome)
     {
         return DistributeGenomeByNucleotide(genome, 'a');
     }
     
-    public static DistibutionData DistributeGenomeByCytosine(string genome)
+    public static DistributionData DistributeGenomeByCytosine(string genome)
     {
         return DistributeGenomeByNucleotide(genome, 'c');
     }
     
-    public static DistibutionData DistributeGenomeByGuanine(string genome)
+    public static DistributionData DistributeGenomeByGuanine(string genome)
     {
         return DistributeGenomeByNucleotide(genome, 'g');
     }
     
-    public static DistibutionData DistributeGenomeByThymine(string genome)
+    public static DistributionData DistributeGenomeByThymine(string genome)
     {
         return DistributeGenomeByNucleotide(genome, 't');
     }
     
-    public static DistibutionData DistributeGenomeByConstantLength(string genome, int length, int position)
+    public static DistributionData DistributeGenomeByConstantLength(string genome, int length, int position)
     {
         string normalizedGenome = NormalizeGenomeByLength(genome, length);
 
@@ -37,12 +37,12 @@ public static class DistributionHelper
         return DoStatisticalCalculations(sequences, genome);
     }
     
-    public static DistibutionData DistributeGenomeByNgram(string genome, int size)
+    public static DistributionData DistributeGenomeByNgram(string genome, int size)
     {
         return DoStatisticalCalculations(ObtainNgram(genome, size).ToArray(), genome);
     }
 
-    private static DistibutionData DistributeGenomeByNucleotide(string genome, char n)
+    private static DistributionData DistributeGenomeByNucleotide(string genome, char n)
     {
         string[] sequences = genome
             .Replace(n, ' ')
@@ -54,7 +54,7 @@ public static class DistributionHelper
         return DoStatisticalCalculations(sequences, genome);
     }
 
-    private static DistibutionData DoStatisticalCalculations(string[] sequences, string genome)
+    private static DistributionData DoStatisticalCalculations(string[] sequences, string genome)
     {
         int adenineAmount = genome.Count(c => c == 'a');
         int cytosineAmount = genome.Count(c => c == 'c');
@@ -73,7 +73,7 @@ public static class DistributionHelper
         double secondCentralMoment = CalculateSecondCentralMoment(sequences, sequencesAmount, firstCentralMoment);
         double dispersionCoefficient = CalculateDispersionCoefficient(firstCentralMoment, secondCentralMoment);
 
-        return new DistibutionData()
+        return new DistributionData()
         {
             AdenineAmount = adenineAmount,
             CytosineAmount = cytosineAmount,

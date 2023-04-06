@@ -1,6 +1,6 @@
 ﻿namespace GenomeAnalyzer.Domain.Distribution;
 
-public class DistibutionData
+public class DistributionData
 {
     public string DistributedGenome { get; set; }
     

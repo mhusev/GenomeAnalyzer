@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics;
+using GenomeAnalyzer.Domain.Distribution;
 using GenomeAnalyzer.Domain.Entities;
+using GenomeAnalyzer.Domain.Response;
 using GenomeAnalyzer.Domain.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using GenomeAnalyzer.Models;
@@ -31,6 +33,12 @@ public class HomeController : Controller
         }
         
         return RedirectToAction(nameof(Index));
+    }
+    
+    [HttpPut]
+    public async Task<IBaseResponse<DistributionData>> GetDistributionData([FromBody] DistributionParams distributionParams)
+    {
+        return await _homeService.GetDistributionData(distributionParams);
     }
 
     [HttpPost]
