@@ -1,0 +1,92 @@
+﻿@using GenomeAnalyzer.Domain.Enum
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model GenomeAnalyzer.Domain.Entities.GenomeEntity
+
+@{
+    ViewData["Title"] = $"{Model.Name} - Distribution";
+}
+
+<h3 class="mb-3 text-muted">Distribution form</h3>
+<div>
+    <h4 class="mb-3 text-muted">Genome</h4>
+    <form class="mb-3" id="genomeForm">
+        <input asp-for="Id" name="id" type="hidden"/>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="col-form-label">Name</label>
+                <input asp-for="@Model.Name" name="name" type="text" class="form-control" style="pointer-events: none;" readonly/>
+            </div>
+            <div class="form-group col-md-6">
+                <label class="col-form-label">Type</label>
+                <select asp-for="@Model.Type" name="type" class="form-control" asp-items="Html.GetEnumSelectList<SpeciesType>()" style="pointer-events: none;" readonly></select>
+            </div>
+            <div class="form-group col-md-12">
+                <label class="col-form-label">Raw genome</label>
+                <textarea asp-for="@Model.RawGenome" name="rawGenome" type="text" class="form-control" rows="7" readonly></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    <div class="col-3" id="distributionOptions">
+        <h5 class="mb-3 text-muted">Method</h5>
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="radio" name="distrRadios" id="nucRadio" value="option1" checked>
+            <label class="form-check-label">
+                By a nucleotide
+            </label>
+        </div>
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="radio" name="distrRadios" id="constLenRadio" value="option2">
+            <label class="form-check-label">
+                By constant lenght
+            </label>
+        </div>
+        <div class="form-check mb-3">
+            <input class="form-check-input" type="radio" name="distrRadios" id="ngramRadio" value="option3">
+            <label class="form-check-label">
+                By Ngram
+            </label>
+        </div>
+    </div>
+    <div class="col-9">
+        <h5 class="mb-3 text-muted">Parameters</h5>
+        <div id="nucParams">
+            <form>
+                <div class="mb-3">
+                    <label class="form-label">Nucleotide for distribution:</label>
+                    <select class="form-select">
+                        <option value="a">Adenine</option>
+                        <option value="c">Cytosine</option>
+                        <option value="g">Guanine</option>
+                        <option value="t">Thymine</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div id="constLenParams" style="display:none;">
+            <form>
+                <div class="mb-3">
+                    <label class="form-label">Sequence length:</label>
+                    <input id="constSeqLength" name="constSeqLength" type="number" min="1" class="form-control"/>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Start from:</label>
+                    <select id="startPosSelect" class="form-select"></select>
+                </div>
+            </form>
+        </div>
+        <div id="ngramParams" style="display:none;">
+            <div class="mb-3">
+                <div class="mb-3">
+                    <label class="form-label">Sequence length:</label>
+                    <input id="ngramSeqLength" name="ngramSeqLength" type="number" min="1" class="form-control"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/Home/distribution.js"></script>

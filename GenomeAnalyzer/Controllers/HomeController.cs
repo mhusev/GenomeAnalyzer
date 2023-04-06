@@ -21,6 +21,18 @@ public class HomeController : Controller
         return View(_homeService.GetAll());
     }
 
+    public async Task<IActionResult> Distribute(long id)
+    {
+        var response = await _homeService.Distribute(id);
+
+        if (response.StatusCode == Domain.Enum.StatusCode.Ok)
+        {
+            return View(response.Data);
+        }
+        
+        return RedirectToAction(nameof(Index));
+    }
+
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateGenomeViewModel model)
     {
@@ -58,9 +70,6 @@ public class HomeController : Controller
     [HttpDelete]
     public async Task<IActionResult> Delete([FromQuery] long id)
     {
-        Console.WriteLine("////////////////////////////////////////////////////");
-        Console.WriteLine(id);
-        
         var response = await _homeService.Delete(id);
         
         if (response.StatusCode == Domain.Enum.StatusCode.Ok)

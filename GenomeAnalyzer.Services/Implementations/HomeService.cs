@@ -119,4 +119,25 @@ public class HomeService : IHomeService
             Data = false
         };
     }
+
+    public async Task<IBaseResponse<GenomeEntity>> Distribute(long id)
+    {
+        var entity = await _genomeRepository.GetAll().FirstOrDefaultAsync(e => e.Id == id);
+
+        if (entity != null)
+        {
+            return new BaseResponse<GenomeEntity>()
+            {
+                Description = "Undistributed genome was given successfully.",
+                StatusCode = StatusCode.Ok,
+                Data = entity
+            };
+        }
+        
+        return new BaseResponse<GenomeEntity>()
+        {
+            Description = "Something went wrong, cannot get a genome.",
+            StatusCode = StatusCode.InternalServerError,
+        };
+    }
 }
