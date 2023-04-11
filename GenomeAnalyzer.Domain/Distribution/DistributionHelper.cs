@@ -44,37 +44,14 @@ public static class DistributionHelper
 
     private static DistributionData DistributeGenomeByNucleotide(string genome, char n)
     {
-        string rawGenome = genome;
-        genome = genome.Replace(n, ' ');
-
-        for (int i = 0; i < genome.Length - 1; i++)
-        {
-            if (genome[i] == ' ' && genome[i + 1] == ' ')
-            {
-                genome = genome.Insert(i + 1, "x");
-            }
-        }
-
-        if (genome.Last() == ' ')
-        {
-            genome = genome.Remove(genome.Length - 1, 1);
-        }
-
-        if (genome[0] == ' ')
-        {
-            genome = genome.Remove(0, 1);
-        }
-
-        return DoStatisticalCalculations(genome.Split(' '), rawGenome);
-        
-        /*string[] sequences = genome
+        string[] sequences = genome
             .Replace(n, ' ')
             .Replace("  ", " x ")
             .Split(' ')
             .Where(seq => seq.Length != 0 && seq != " ")
             .ToArray();
 
-        return DoStatisticalCalculations(sequences, genome);*/
+        return DoStatisticalCalculations(sequences, genome);
     }
 
     private static DistributionData DoStatisticalCalculations(string[] sequences, string genome)
@@ -124,7 +101,7 @@ public static class DistributionHelper
     {
         genome = NormalizeGenomeByLength(genome, size);
         
-        for (int i = 0; i < genome.Length - size + 1; i+= size)
+        for (int i = 0; i < genome.Length - size + 1; i+= 1)
         {
             yield return genome.Substring(i, size);
         }
