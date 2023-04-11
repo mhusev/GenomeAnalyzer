@@ -44,14 +44,37 @@ public static class DistributionHelper
 
     private static DistributionData DistributeGenomeByNucleotide(string genome, char n)
     {
-        string[] sequences = genome
+        string rawGenome = genome;
+        genome = genome.Replace(n, ' ');
+
+        for (int i = 0; i < genome.Length - 1; i++)
+        {
+            if (genome[i] == ' ' && genome[i + 1] == ' ')
+            {
+                genome = genome.Insert(i + 1, "x");
+            }
+        }
+
+        if (genome.Last() == ' ')
+        {
+            genome = genome.Remove(genome.Length - 1, 1);
+        }
+
+        if (genome[0] == ' ')
+        {
+            genome = genome.Remove(0, 1);
+        }
+
+        return DoStatisticalCalculations(genome.Split(' '), rawGenome);
+        
+        /*string[] sequences = genome
             .Replace(n, ' ')
             .Replace("  ", " x ")
             .Split(' ')
             .Where(seq => seq.Length != 0 && seq != " ")
             .ToArray();
 
-        return DoStatisticalCalculations(sequences, genome);
+        return DoStatisticalCalculations(sequences, genome);*/
     }
 
     private static DistributionData DoStatisticalCalculations(string[] sequences, string genome)
@@ -68,7 +91,7 @@ public static class DistributionHelper
         Dictionary<int, int> rankFrequency = CalculateRankFrequency(sequencesFrequency);
         Dictionary<int, int> statisticalSpectrum = CalculateStatisticalSpectrum(sequencesFrequency);
 
-        double entropy = CalculateEntropy(sequencesFrequency);
+        double entropy = CalculateEntropy(rankFrequency);
         double firstCentralMoment = CalculateFirstCentralMoment(sequences, sequencesAmount);
         double secondCentralMoment = CalculateSecondCentralMoment(sequences, sequencesAmount, firstCentralMoment);
         double dispersionCoefficient = CalculateDispersionCoefficient(firstCentralMoment, secondCentralMoment);
@@ -120,15 +143,20 @@ public static class DistributionHelper
         return genome;
     }
     
-    private static double CalculateEntropy(IDictionary<string, int> sequencesFrequency)
+    private static double CalculateEntropy(IDictionary<int, int> rankFrequency)
     {
-        double entropy = 0;
+        double entropy = 0, sumOfFrequencies = 0;
 
-        foreach (var freq in sequencesFrequency.Values)
+        foreach (int frequency in rankFrequency.Values)
         {
-            entropy += freq * Math.Log(freq);
+            sumOfFrequencies += frequency;
         }
 
+        foreach (int frequency in rankFrequency.Values)
+        {
+            entropy += frequency / sumOfFrequencies * Math.Log(frequency / sumOfFrequencies);
+        }
+        
         return -entropy;
     }
     
@@ -193,6 +221,7 @@ public static class DistributionHelper
         foreach (var key in sequencesFrequency.Keys)
         {
             rankFrequency[rank] = sequencesFrequency[key];
+            rank++;
         }
 
         return rankFrequency

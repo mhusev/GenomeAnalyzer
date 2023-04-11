@@ -92,5 +92,69 @@
     </div>
 </div>
 
+<div id="distributionForm" class="row" style="display:none;">
+    <div class="col-3 mb-3">
+        <h5 class="mb-3 text-muted">Distribution parameters</h5>
+        <div class="mb-3">
+            <label class="form-label">Entropy:</label>
+            <input id="entropy" type="number" class="form-control" readonly/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">First central moment:</label>
+            <input id="firstCentralMoment" type="number" class="form-control" readonly/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Second central moment:</label>
+            <input id="secondCentralMoment" type="number" class="form-control" readonly/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Dispersion coefficient:</label>
+            <input id="dispersionCoefficient" type="number" class="form-control" readonly/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Adenine amount:</label>
+            <input id="adenineAmount" type="number" class="form-control" readonly/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Guanine amount:</label>
+            <input id="guanineAmount" type="number" class="form-control" readonly/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Cytosine amount:</label>
+            <input id="cytosineAmount" type="number" class="form-control" readonly/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Thymine amount:</label>
+            <input id="thymineAmount" type="number" class="form-control" readonly/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Nucleotides:</label>
+            <input id="nucleotidesAmount" type="number" class="form-control" readonly/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Sequences:</label>
+            <input id="sequencesAmount" type="number" class="form-control" readonly/>
+        </div>
+    </div>
+    <div class="col-9">
+        
+        <h5 class="mb-3 text-muted">Rank-frequency distribution</h5>
+        <div class="row">
+            <div class="col-6" style="height: 425px;">
+                <canvas id="rankFrequencyChart"></canvas>
+            </div>
+            <div id="rankFrequencyData" class="col-6" style="height: 425px; overflow: auto;"></div>
+        </div>
+        <h5 class="mb-3 text-muted">Statistical spectrum</h5>
+        <div class="row">
+            <div class="col-6" style="height: 425px;">
+                <canvas id="statisticalSpectrumChart"></canvas>
+            </div>
+            <div id="statisticalSpectrumData" class="col-6" style="height: 425px; overflow: auto;"></div>
+        </div>
+    </div>
+</div>
+
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="~/js/Home/distribution.js"></script>
