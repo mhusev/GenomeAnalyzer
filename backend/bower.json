@@ -1,0 +1,22 @@
+{
+  "name": "GenomeAnalyzer",
+  "homepage": "https://github.com/mhusev/GenomeAnalyzer",
+  "authors": [
+    "Mykola Husev <mhusev@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "chartjs": "^4.2.1",
+    "bootstrap": "^5.2.3",
+    "jquery": "^3.6.4"
+  }
+}
