@@ -30,7 +30,7 @@ public class GenomeController : Controller
     }
     
     [HttpGet]
-    public async Task<IActionResult> GetGenome(long id)
+    public async Task<IActionResult> Get(long id)
     {
         var response = await _genomeService.Get(id);
         
