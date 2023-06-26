@@ -33,8 +33,13 @@ public class GenomeController : Controller
     public async Task<IActionResult> Get(long id)
     {
         var response = await _genomeService.Get(id);
-        
-        return Ok(response.Data);
+
+        if (response.StatusCode == Domain.Enum.StatusCode.Ok)
+        {
+            return Ok(response.Data);
+        }
+       
+        return BadRequest(new { description = response.Description });
     }
     
     [HttpPut]
