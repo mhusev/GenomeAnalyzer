@@ -1,12 +1,9 @@
-﻿namespace GenomeAnalyzer.Domain.Distribution;
+﻿namespace GenomeAnalyzer.Domain.DTO;
 
-public class DistributionParams
+public class DistributionParamsDTO
 {
     public long Id { get; set; }
-    
     public char? Nucleotide { get; set; }
-    
     public int? SequenceLength { get; set; }
-    
     public int? StartPosition { get; set; }
 }

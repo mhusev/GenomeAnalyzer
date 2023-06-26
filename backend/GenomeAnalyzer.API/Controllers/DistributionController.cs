@@ -1,5 +1,4 @@
-using GenomeAnalyzer.Domain.Distribution;
-using GenomeAnalyzer.Domain.Response;
+using GenomeAnalyzer.Domain.DTO;
 using GenomeAnalyzer.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,29 +8,23 @@ namespace GenomeAnalyzer.API.Controllers;
 [Route("[controller]")]
 public class DistributionController : Controller
 {
-    private readonly IHomeService _homeService;
+    private readonly IDistributionService _distributionService;
 
-    public DistributionController(IHomeService homeService)
+    public DistributionController(IDistributionService distributionService)
     {
-        _homeService = homeService;
-    }
-    
-    [HttpGet]
-    public async Task<IActionResult> Distribute(long id)
-    {
-        var response = await _homeService.Distribute(id);
-
-        if (response.StatusCode == Domain.Enum.StatusCode.Ok)
-        {
-            return Ok(response.Data);
-        }
-        
-        return BadRequest(new { description = response.Description });
+        _distributionService = distributionService;
     }
     
     [HttpPut]
-    public async Task<IBaseResponse<DistributionData>> GetDistributionData([FromBody] DistributionParams distributionParams)
+    public async Task<IActionResult> Distribute([FromBody] DistributionParamsDTO dto)
     {
-        return await _homeService.GetDistributionData(distributionParams);
+        var response = await _distributionService.Distribute(dto);
+
+        if (response.StatusCode == Domain.Enum.StatusCode.Ok)
+        {
+            return Ok(response);
+        }
+        
+        return BadRequest(new { description = response.Description });
     }
 }
