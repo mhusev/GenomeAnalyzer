@@ -1,5 +1,5 @@
+using GenomeAnalyzer.Domain.DTO;
 using GenomeAnalyzer.Domain.Entities;
-using GenomeAnalyzer.Domain.ViewModels;
 using GenomeAnalyzer.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,17 +9,17 @@ namespace GenomeAnalyzer.API.Controllers;
 [Route("[controller]")]
 public class GenomeController : Controller
 {
-    private readonly IHomeService _homeService;
+    private readonly IGenomeService _genomeService;
 
-    public GenomeController(IHomeService homeService)
+    public GenomeController(IGenomeService genomeService)
     {
-        _homeService = homeService;
+        _genomeService = genomeService;
     }
     
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreateGenomeViewModel model)
+    public async Task<IActionResult> Create([FromBody] CreateGenomeDTO dto)
     {
-        var response = await _homeService.Create(model);
+        var response = await _genomeService.Create(dto);
 
         if (response.StatusCode == Domain.Enum.StatusCode.Ok)
         {
@@ -32,7 +32,7 @@ public class GenomeController : Controller
     [HttpGet]
     public async Task<IActionResult> GetGenome(long id)
     {
-        var response = await _homeService.GetGenome(id);
+        var response = await _genomeService.Get(id);
         
         return Ok(response.Data);
     }
@@ -40,7 +40,7 @@ public class GenomeController : Controller
     [HttpPut]
     public async Task<IActionResult> Edit([FromBody] GenomeEntity entity)
     {
-        var response = await _homeService.Edit(entity);
+        var response = await _genomeService.Edit(entity);
         
         if (response.StatusCode == Domain.Enum.StatusCode.Ok)
         {
@@ -53,7 +53,7 @@ public class GenomeController : Controller
     [HttpDelete]
     public async Task<IActionResult> Delete([FromQuery] long id)
     {
-        var response = await _homeService.Delete(id);
+        var response = await _genomeService.Delete(id);
         
         if (response.StatusCode == Domain.Enum.StatusCode.Ok)
         {

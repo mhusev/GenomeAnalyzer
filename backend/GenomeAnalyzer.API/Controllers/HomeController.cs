@@ -1,7 +1,3 @@
-using GenomeAnalyzer.Domain.Distribution;
-using GenomeAnalyzer.Domain.Entities;
-using GenomeAnalyzer.Domain.Response;
-using GenomeAnalyzer.Domain.ViewModels;
 using GenomeAnalyzer.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

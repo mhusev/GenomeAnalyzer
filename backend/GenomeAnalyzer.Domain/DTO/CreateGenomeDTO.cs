@@ -1,12 +1,10 @@
 ﻿using GenomeAnalyzer.Domain.Enum;
 
-namespace GenomeAnalyzer.Domain.ViewModels;
+namespace GenomeAnalyzer.Domain.DTO;
 
-public class CreateGenomeViewModel
+public class CreateGenomeDTO
 {
     public string Name { get; set; }
-    
     public SpeciesType Type { get; set; }
-    
     public string RawGenome { get; set; }
 }
